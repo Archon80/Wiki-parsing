@@ -1,0 +1,10 @@
+
+
+16-12-25 20:57:52
+
+
+16-12-25 22:40:45
+ERROR: /var/www/html/sm3/lib/add_article.php:122<br />В методе isArticle() класса AddArticles произошла техническая ошибка. Не удалось получить данные из АПИ
+
+16-12-25 22:52:40
+ERROR: /var/www/html/sm3/lib/add_article.php:130<br />В методе isArticle() класса AddArticles произошла техническая ошибка. Не удалось получить данные из АПИ

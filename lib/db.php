@@ -54,8 +54,6 @@ class DB {
             $size    = self::clearData($arrArticle['size'], 'i');
             $count   = self::clearData($arrArticle['count'], 'i');
 
-            $arrToClient = ["name"=>$name, "link"=>$link, "size"=>$size, "count"=>$count];
-
             $q =    "INSERT INTO articles(`name`,    `content`,    `link`,    `size`,    `count`)
                                   VALUES (\"$name\", \"$content\", \"$link\", \"$size\", \"$count\")";
             $query = $db->prepare($q);
@@ -84,7 +82,6 @@ class DB {
 
             $db->commit();
             $answer["success"] = true;
-            $answer["body"] = $arrToClient;
             // self::showDev($arrToClient);exit();
         }  
         catch(PDOException $e) {  
@@ -253,9 +250,9 @@ class DB {
                            articles_words.id_article, articles_words.id_word, articles_words.count,
                            words.id_word, words.word
                     FROM   `articles`, `articles_words`, `words`
-                    WHERE  articles.id_article = articles_words.id_article
-                    AND    articles_words.id_word = words.id_word
-                    AND    words.word=\"$wordName\"
+                    WHERE  words.word=\"$wordName\"
+                    AND    articles.id_article = articles_words.id_article
+                    AND    words.id_word = articles_words.id_word
                     ORDER BY articles_words.count DESC";
 
             $query = $db->prepare($q);

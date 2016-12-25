@@ -1,16 +1,17 @@
-<h3>В данном блоке будет производиться скачивание статей.</h3>
+<form action="" method="post" id="form_inport_article">
+	<fieldset>
+		<legend><div>Введите ключевое слово</div></legend>
+		<input type="text" id="field_search_in_wiki" name="field_search_in_wiki">
+		<button type="submit" name="btn_search_in_wiki" id="btn_search_in_wiki">Найти статью</button>
+	</fieldset>
+</form>
 <br>
-<button class="btn_articles_find">Поиск статей</button>
+<br>
+<!-- вывод информации для пользователя: итог импорта статьи -->
+<div>{$answer}</div>
 <br />
 <br />
-<br />
-<div class="div_articles_list">
-	<select class="select_articles_list"></select>
-	<button class="btn_articles_add">Добавить статью в БД</button>
-</div>
-<br />
-<br />
-<br />
+<!-- таблица вывода статей, уже имеющихся в БД -->
 <table class="tb_search">
 	<thead>
 		<th class="tb-search-name">Название статьи</th>
@@ -19,10 +20,6 @@
 		<th class="tb-search-count">Кол-во слов</th>
 	</thead>
 	
-	<tbody>
-			
-	</tbody>
-
-	<tfoot>
-	</tfoot>
+	<tbody></tbody>
+	<tfoot></tfoot>
 </table>

@@ -59,7 +59,7 @@ h3 {
 .tb-search-name {
 	/**/
 	/*border: 1px solid red;*/
-	width: 400px;
+	width: 300px;
 	text-align: center;
 	padding: 10px 0;
 }
@@ -67,7 +67,7 @@ h3 {
 .tb-search-link {
 	/**/
 	/*border: 1px solid green;*/
-	width: 250px;
+	width: 350px;
 	text-align: center;
 	padding: 10px 0;
 }

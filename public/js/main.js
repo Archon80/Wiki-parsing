@@ -1,6 +1,5 @@
 // конфигурационные данные - пути и переменные верстки
-const PATH_TO_SERVER      = './lib/server/';		// путь до папки с серверными скриптами, к которым стучимся аяксом
-const PATH_TO_SOURCE      = '../../source/';		// путь до папки со статьями
+const PATH_TO_SERVER      = './lib/';		// путь до папки с серверными скриптами, к которым стучимся аяксом
 
 const BTN_ARTICLES_FIND   = $('.btn_articles_find');	// кнопка поиска статей
 const BTN_ARTICLES_ADD    = $('.btn_articles_add');	// кнопка добавления статьи в БД
@@ -42,70 +41,43 @@ showImportTab();
 	}
 });
 
-// вкладка "Import": клик по кнопке "Поиск статей"
-BTN_ARTICLES_FIND.click(function() {
-	var btn = $(this).prop('disabled', true);
-
-	$.post(PATH_TO_SERVER+'find_articles.php', '', function(answer){
-		console.log(typeof answer, answer); //return;
-		var arrArticles = JSON.parse(answer);
-
-		if (arrArticles.length) {
-			arrArticles.forEach(function(elem, i, arr) {
-				SELECT_ART_LIST.append(new Option(elem, i));
-			});
-		}
-		else {
-			DIV_SELECT_ART_LIST.html('Нет статей, доступных для добавления в БД.');
-		}
-
-		DIV_SELECT_ART_LIST.show();
-	})
-	.fail(function(xhr) {
-		alertUser('error - ' + xhr.status);
-	})
-	.always(function() {
-		btn.prop('disabled', false);
-	});
+// проверка заполнения поля импортирования статьи на клиенте
+// на сервере тоже проверка выполняется, но ни к чему его лишний раз дергать
+document.querySelector('#form_inport_article').addEventListener("submit", function(e){
+	if ( !$('#field_search_in_wiki').val() ) {
+		e.preventDefault();// не позволяем форме слать данные на сервер
+		alert('Нужно ввести имя искомой статьи.');		
+	}
 });
 
-// вкладка "Import": клик по кнопке "Добавить стаью в БД"
-BTN_ARTICLES_ADD.click(function() {
-	var
-		btn = $(this).prop('disabled', true),
-		dataToServer = {
-			"fname":PATH_TO_SOURCE + $('.select_articles_list :selected').text()
-		};
-
-	$.post(PATH_TO_SERVER+'add_article.php', dataToServer, function(answer){
-		console.log(typeof answer, answer); //return;
-		var answer = JSON.parse(answer);
-		if (!answer['success']) {
-			alertUser(answer['error']);
-		}
-		addOneArticle(answer['body'], 'arr');
-	})
-	.fail(function(xhr) {
-		alertUser('error - ' + xhr.status);
-	})
-	.always(function() {
-		btn.prop('disabled', false);
-	});
-});
 
 // вкладка "Search": клик по кнопке "Найти"
+// (поиск существующих статей в БД по введенному юзером слову)
 BTN_ARTICLES_SEARCH.click(function() {
-	var
-		btn = $(this).prop('disabled', true),
+	// предварительная очистка результатов предыдуших поисков
+	$('.show-one-article').html("");
+
+	// проверка заполнения поля поисковой формы на стороне клиента
+	var userWord = $('.search_field').val();
+	if (!userWord) {
+		alert('Необходимо ввести слово для поиска в БД');
+		return;
+	}
+	// формируем объект данных для отправки на сервер,
+	// и блокируем кнопку на время выполнения запроса, чтоб юзеры не спамили
+	var btn = $(this).prop('disabled', true),
 		dataToServer = {
-			"wordName": $('.search_field').val()
+			"wordName": userWord
 		};
 
+	// обращаемся к серверу в поиске ключевых слов
 	$.post(PATH_TO_SERVER+'get_some_words.php', dataToServer, function(answer){
-		// console.log(typeof answer, answer); return;
+		// выполняем проверку данных с сервера
+		// console.log(answer);return;
 		var answer = JSON.parse(answer);
 		if (!answer['success']) {
 			alertUser(answer['error']);
+			return;
 		}
 		var articles = answer['body'];
 
@@ -114,19 +86,19 @@ BTN_ARTICLES_SEARCH.click(function() {
 			$('.show-list-of-articles').append('div').html('Найдено совпадений: '+articles.length+'<br><br>');
 			const SEARCH_ART_LIST = document.querySelector('.show-list-of-articles');
 			
-			// вставляем на страницу информацию о каждой статье
+			// циклический вывод информации о статьях на страницу
 			articles.forEach(function(elem, i, arr) {
 				SEARCH_ART_LIST.appendChild(uCreateDiv(elem));
 			});
 
 			// вешаем событие: при клике по заголовку - показ содержимого (в блоке справа)
 			$('.search-anchor').click(function() {
-				console.log($(this).parent().attr('cont'));
-				$('.show-one-article').html($(this).parent().attr('cont'));
+				$('.show-one-article').html( $(this).parent().attr('cont') );
 			});
 
-			///////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////
 
+			// принимает информацию о найденной статье, выводит ее на страницу
 			function uCreateDiv(elem) {
 				var d = document.createElement('div');//.appendChild(a);
 				d.className = 'search_wrap_div';
@@ -148,9 +120,6 @@ BTN_ARTICLES_SEARCH.click(function() {
 		btn.prop('disabled', false);
 	});
 });
-
-
-
 
 /************************************ вспомогательные функции *****************************/
 
@@ -232,4 +201,3 @@ function addOneArticle(elem) {
 		});
 	}
 } // addOneArticle
-
