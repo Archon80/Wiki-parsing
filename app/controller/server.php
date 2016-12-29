@@ -3,6 +3,7 @@
     Сервер для приема ajax-запросов с клиента
 */
 require_once '../config.php';
+require_once '../model/safemysql.class.php';
 require_once '../model/db.php';
 require_once 'add_article.php';
 

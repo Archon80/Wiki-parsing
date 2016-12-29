@@ -11,7 +11,6 @@ h3 {
 
 .wrapper {
 	width: 960px;
-	/*border: 1px solid #000;*/
 	margin: 0 auto;
 	position  : relative;
     background: white;
@@ -21,15 +20,18 @@ h3 {
 .menu {
 	width: 400px;
 	margin: 0 auto;
-	/*border: 3px solid green;*/
 	padding-bottom: 5px;
 	text-align:center;
+}
+.middle-menu-div {
+  	visibility: hidden;
+  	width: 20px;
+  	padding: 10px;
 }
 	.i, .s {
 		/*float:left;*/
 		width: 180px;
 		height: 20px;
-		border: 3px solid #ccc;
 		display: inline-block;
 		font-size: 20px;
 		font-weight: bold;
@@ -46,43 +48,35 @@ h3 {
 
 /************** таблица вывода статей из БД *******************/
 .tb_search {
-	border: 1px solid #000;
 	border-collapse: collapse;
 	margin: 0 auto;
 }
-.tb_search TD, TH {
-    border: 1px solid black;
+.tb_search TH {
+	color: #5ab45a;
 }
+
 .tb_search TD {
     padding: 10px 0 10px 10px;
 }
 .tb-search-name {
-	/**/
-	/*border: 1px solid red;*/
 	width: 300px;
 	text-align: center;
 	padding: 10px 0;
 }
 
 .tb-search-link {
-	/**/
-	/*border: 1px solid green;*/
 	width: 350px;
 	text-align: center;
 	padding: 10px 0;
 }
 
 .tb-search-size {
-	/**/
-	/*border: 1px solid blue;*/
 	width: 120px;
 	text-align: center;
 	padding: 10px 0;
 }
 
 .tb-search-count {
-	/**/
-	/*border: 1px solid black;*/
 	width: 100px;
 	text-align: center;
 	padding: 10px 0;
@@ -98,19 +92,10 @@ h3 {
 }
 
 /******************** поиск статей в БД ****************************/
-.search-wrapper {
-	/*border: 1px solid #000;*/
-	/*position: relative;*/
-}
-
-.search-div {
-	/**/
-}
 
 .show-list-of-articles {
 	float: left;
 	width: 400px;
-	/*border: 1px solid red;*/
 	margin: 10px;
 	min-height: 100px;
 	display: inline-block;
@@ -119,7 +104,7 @@ h3 {
 .show-one-article {
 	display: inline-block;
 	margin: 10px;
-	border: 1px solid #000;
+	border: 1px solid #5ab45a;
 	min-height: 100px;
 	width: 500px;
 	padding: 4px;
@@ -127,7 +112,4 @@ h3 {
 
 .search_wrap_div {
 	margin: 10px 0;
-	/*border: 1px solid red;*/
 }
-
-

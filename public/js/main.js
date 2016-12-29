@@ -1,5 +1,4 @@
-// конфигурационные данные - пути и переменные верстки
-const PATH_TO_SERVER      = '../app/controller/';		// путь до папки с серверными скриптами, к которым стучимся аяксом
+const PATH_TO_SERVER      = '../app/controller/';
 
 // выполняем запрос к БД и выстраиваем таблицу всех имеющихся в БД статей
 (function() {
@@ -45,6 +44,7 @@ $("#btn_search_in_wiki").click(function() {
 		var btn = $(this).prop('disabled', true);
 
 		$.post(PATH_TO_SERVER+'server.php', {"add_article_in_db": userSearchWord}, function(answer){
+			// console.log(answer);return ;
 			var total = '';
 			if (answer) {
 				var article    = JSON.parse(answer),
@@ -68,8 +68,8 @@ $("#btn_search_in_wiki").click(function() {
 
 
 // вкладка "Search": клик по кнопке "Найти" (поиск существующих статей в БД по введенному юзером слову)
-$('.btn_articles_search').click(function() {
-	var userWord = $('.search_field').val();
+$('#btn_articles_search').click(function() {
+	var userWord = $('#search_field').val();
 	if (!userWord) {
 		alert('Необходимо ввести слово для поиска в БД');
 		return;
@@ -121,19 +121,19 @@ $('.btn_articles_search').click(function() {
 
 /************************************ вспомогательные функции *****************************/
 
-// показать левую вкладку
+// скрыть обе вкладки
 function hideBothTabs() {
 	$('.content').hide();
 }
 // показать левую вкладку
 function showImportTab() {
 	hideBothTabs()
-	$('.import').show();
+	$('#import').show();
 }
 // показать левую вкладку
 function showSearchTab() {
 	hideBothTabs()
-	$('.search').show();
+	$('#search').show();
 }
 
 // функция принимает массив данных о статье и добавляет статью в общую выборку
@@ -156,11 +156,10 @@ function addOneArticle(elem) {
 // вывод сообщения пользователю об итогах копирования статьи
 function getTotalInfo(res, arrArticle, full_time)
 {
-    // если транзакция не завершилась успешно
     if (!res) {
         return 'Статья с таким названием в википедии не найдена.';
     }
-    // формируем информационную строку
+
     var info = '';
     info += 'Импорт завершен.<br /><br />';
     info += 'Найдена статья по адресу: ' + arrArticle['link'] + '<br />';
