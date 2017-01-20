@@ -1,0 +1,115 @@
+@import url("reset.css");
+
+body {
+	font-family: "Helvetica neue", Helvetica, Tahoma, Verdana, sans-serif;
+	background-color: #ddd; 
+}
+h3 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.wrapper {
+	width: 960px;
+	margin: 0 auto;
+	position  : relative;
+    background: white;
+    padding: 20px;
+	
+}
+.menu {
+	width: 400px;
+	margin: 0 auto;
+	padding-bottom: 5px;
+	text-align:center;
+}
+.middle-menu-div {
+  	visibility: hidden;
+  	width: 20px;
+  	padding: 10px;
+}
+	.i, .s {
+		/*float:left;*/
+		width: 180px;
+		height: 20px;
+		display: inline-block;
+		font-size: 20px;
+		font-weight: bold;
+		padding: 10 30px;
+		text-align:center;
+	}
+
+/*
+	Изначально обе вкладки невидимые
+*/
+.content {
+	display: none;
+}
+
+/************** таблица вывода статей из БД *******************/
+.tb_search {
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+.tb_search TH {
+	color: #5ab45a;
+}
+
+.tb_search TD {
+    padding: 10px 0 10px 10px;
+}
+.tb-search-name {
+	width: 300px;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.tb-search-link {
+	width: 350px;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.tb-search-size {
+	width: 120px;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.tb-search-count {
+	width: 100px;
+	text-align: center;
+	padding: 10px 0;
+}
+
+
+/********************* список статей в директории ********************/
+.div_articles_list {
+	display: none;
+}
+.select_articles_list {
+	margin-bottom: 20px;
+}
+
+/******************** поиск статей в БД ****************************/
+
+.show-list-of-articles {
+	float: left;
+	width: 400px;
+	margin: 10px;
+	min-height: 100px;
+	display: inline-block;
+}
+
+.show-one-article {
+	display: inline-block;
+	margin: 10px;
+	border: 1px solid #5ab45a;
+	min-height: 100px;
+	width: 500px;
+	padding: 4px;
+}
+
+.search_wrap_div {
+	margin: 10px 0;
+}

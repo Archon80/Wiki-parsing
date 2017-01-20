@@ -1,0 +1,9 @@
+php_flag display_errors On
+php_value error_reporting "E_ALL"
+
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+RewriteRule ^ %1 [L,NE,R=302]
+RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+RewriteBase /sm3/
